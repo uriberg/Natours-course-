@@ -1,0 +1,99 @@
+@import "../abstracts/variables";
+
+.btn {
+
+  &, &:link, &:visited { /*The :link CSS pseudo-class represents an element that has not yet been visited. It matches every unvisited <a> , <area> , or <link> element that has an href attribute.*/
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block; /*still inline but margin and padding, and with and height, are respected */
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative;
+    font-size: $default-font-size;
+
+
+    /*Change for the <button> element*/
+    border: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    transform: translateY(-.3rem);
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2); /*zero x direction,10 px y direction, blur: 20px, color of shadow. */
+
+    &::after { /*when we hover the button, we want certain styles for the after pseudo element */
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0; /*for fade out effect */
+    }
+  }
+
+  &:active, &:focus {
+    outline: none;
+    transform: translateY(-.1rem);
+    box-shadow: 0 .5rem 1rem rgba($color-black, 0.2); /*zero x direction,10 px y direction, blur: 20px, color of shadow. */
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: #777;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+
+  &::after {
+    content: ""; /* we have to specify the content propert*/
+    display: inline-block; /*we have to specify the display property */
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute; /*to put it behind the button */
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+  }
+
+  &--animated {
+    animation-name: moveInBottom;
+    animation-duration: .5s;
+    animation-timing-function: ease-out;
+    animation-delay: .75s;
+    animation-fill-mode: backwards; /*apply the 0% styles before the animation starts */
+  }
+}
+
+.btn-text {
+  &:link, &:visited {
+    font-size: $default-font-size;
+    color: $color-primary;
+    display: inline-block;/*for all the padding and stuff */
+    text-decoration: none;
+    border-bottom: 1px solid $color-primary;
+    padding: 3px; /*the padding will go between the text and the border line */
+    transition: all .2s;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: 0 1rem 2rem rgba($color-black, .15); /* (x shadow, y shadow, blur, color and opacity */
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    box-shadow: 0 .5rem 1rem rgba($color-black, .15);
+    transform: translateY(0);
+  }
+}

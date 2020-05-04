@@ -1,0 +1,38 @@
+
+*, *::before, *::after { /*the normal universal selector(without pseudo elements) only affects the normal elements. so to avoid undesired behaviour, we mention the pseudo elements too */
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; /*this makes the box-sizing property to be inherited(by default it's not inherited) */
+}
+
+html {
+  /*this defines what 1rem is*/
+  font-size: 62.5%; /*this changes the root font-size !!  1rem = 10px because 10px/16px = 62.5%*/
+
+  @include respond(tab-land) { /*width < 1200*/
+    font-size: 56.25%; /*1 rem = 0px */
+  }
+
+  @include respond(tab-port) {  /*width < 900 */
+    font-size: 50%; /*1 rem = 8px */
+  }
+
+
+  @include respond(big-desktop) {
+    font-size: 75%; /*1 rem = 12px */
+  }
+}
+
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}

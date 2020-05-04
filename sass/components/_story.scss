@@ -1,0 +1,79 @@
+
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3ren 6rem rgba($color-black, .1);
+  background-color: rgba($color-white, .6); /*to make only the background color less opacity, not the entire content */
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
+
+  @include respond(tab-port) {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+
+  @include respond(phone) {
+    transform: skewX(0);
+  }
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    /* define where the content floats around the element(circle here). we must define this element as floated in order for it to work */
+    -webkit-shape-outside: circle(50% at 50% 50%); /*radius 50% === half of the width and height, then define the center of the circle */
+    shape-outside: circle(50% at 50% 50%);
+
+    /*actually draw the circle */
+    clip-path: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative;
+
+    @include respond(phone) {
+      transform: translateX(-3rem) skewX(0);
+    }
+  }
+
+  &__img {
+    height: 100%; /*img is wider than it's height, therefore we need to specify only its height to make it filled correctly in the circle */
+    transform: translateX(-4rem) scale(1.4); /*scale it up so we can then zoom it out when hover */
+    transition: all .5s;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+
+    @include respond(phone) {
+      transform: skewX(0);
+    }
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%); /*20% y direction to put it down before the animation */
+    text-align: center;
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    opacity: 0; /*to make it invisible before the animation */
+    transition: all .5s;
+    backface-visibility: hidden; /*to fix the small shaky phenomena after the transition */
+  }
+
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover &__img {
+    transform: translateX(-4rem) scale(1);
+    filter: blur(3px) brightness(80%); /*lower than 100% to make it darker */
+  }
+}

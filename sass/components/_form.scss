@@ -1,0 +1,105 @@
+
+.form {
+  &__group:not(:last-child){
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    font-size: 1.5rem;
+    padding: 1.5rem 2rem /*we usually give more padding on the side in these cases*/;
+    border-radius: 2px;
+    background-color: rgba($color-white, .5);
+    border: none;
+    font-family: inherit; /*to make it Lato as the rest of the page(by default in inputs the browser don't do that */
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block; /*will take its own line and moves the label one line down */
+    transition: all .3s;
+
+    @include respond(tab-port){
+      width: 100%;
+    }
+
+    &::-webkit-input-placeholder { /*only work in safari and chrome? */
+      color: $color-grey-dark-2;
+    }
+
+    &:focus {
+      outline: none; /*to remove the blue outline*/
+      box-shadow: 0 1rem 2rem rgba($color-black, .1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: .7rem;
+    display: block;
+    transition: all .3s;
+  }
+
+  &__input:placeholder-shown + &__label{ /* + === the adjacent sibling selector */
+    opacity: 0; /*if we didn't write anything, we want the label to be invisible */
+    visibility: hidden; /*we can't animate visibility property, thus we set opacity to zero as well */
+    transform: translateY(-4rem); /*to move it up to the input table as initial state */
+  }
+
+  &__radio-group {
+    width: 49%;
+    display: inline-block; /*to make the buttons sit side by side */
+
+    @include respond(tab-port) {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block; /*we have to specify it as the height and width only works with inline-block or block elements, and span by default is an inline element */
+    position: absolute;
+    left: 0;
+    top: -.4rem;
+
+    &::after {
+      content: "";
+      width: 1.3rem;
+      height: 1.3rem;
+      display: block;
+      border-radius: 50%;
+      position: absolute; /*it's perfectly fine that its parent set to absolute, it will be positioned in relation to its parent as long as its not static */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+  }
+
+  &__radio-input:checked ~ &__radio-label &__radio-button::after{ /* ~ is the general sibling selector. this way we choose the label right after the checked input. then, we check the after pseudo element of the radio-button(i.e the inner circle)*/
+    opacity: 1;
+  }
+
+}

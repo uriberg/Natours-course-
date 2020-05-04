@@ -1,0 +1,17 @@
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: .15;
+  overflow: hidden; /*the object-fill: cover is not enough, so we need to hide the overflow part on the sides */
+
+  &__content {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /*will fit the parent container(while keeping the aspect ratio!) and clip off the video part that goes out of the container. */
+  }
+}
