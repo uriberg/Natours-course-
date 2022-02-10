@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/uriberg/Natours-course-#readme",
   "dependencies": {
-    "node-sass": "^4.13.1"
+    "node-sass": "^7.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^9.7.6",
